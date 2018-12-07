@@ -30,7 +30,7 @@
         #map {
 
         width: 100%;
-		height:400px;
+		height:500px;
 		}
 		.custom-popup .leaflet-popup-content-wrapper {
 		  background:#2c3e50;
@@ -512,123 +512,7 @@
 
 		</div>
 		
-	    <!-- Mapa bodegas -->
 
-		<div class="offers">
-			<div class="">
-				<div class="row">
-					<div class="col text-center">
-						<h2 class="section_title">Localización de las bodegas</h2>
-					</div>
-				</div>
-
-					<!-- Offers Item -->
-					<div class="col-lg-12 offers_col">
-						<div class="offers_item">
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="offers_image_container">
-									 <div id='map' class="custom-popup">
- 
-										  <script>
-										  
-											//crea el mapa, centra la vista y define el zoom
-											var map = L.map('map').setView([41.334693, -1.224871],11);
-											
-											//estilo para los límites de la DO
-											var estilolimite = {
-											"color": "#CC2EFA",
-											"weight": 2, 
-											"opacity": 0.6
-											};
-											
-											//añade los límites de la DO
-											var limite = L.geoJson(limite, { style: estilolimite });
-											limite.addTo(map);
-											
-											//añade Open Street map como mapa base
-											var base = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-											
-											base.addTo(map);
-
-											var wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
-												attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
-											});	
-											
-											//capa ortofoto aérea
-											var ortofoto = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-											attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-											});
-
-											//crea el clúster de puntos
-											var markers = L.markerClusterGroup();
-												
-											//función que muestra el nombre de la bodega en el popup
-											function popup(feature, layer) { 
-
-												var nombre = feature.properties.CEN_DS_NOM;
-												var salto = "<br>";
-												var municipio = feature.properties.MUNICIPIO;
-												var direccion= feature.properties.LOC_DS_DIR;
-												var telefono = feature.properties.LOC_DS_TEL;
-												var paginaweb = feature.properties.LOC_DS_WEB;
-												var htmlString = "<a href="+paginaweb+" target='_blank'>Ver página web</a><br>";
-												layer.bindPopup(nombre.concat(salto,direccion,' - ',municipio,salto,telefono,salto,htmlString)); 	 
-												
-											}
-											
-												// añade puntos al cluster
-												var puntos = L.geoJson(bodegas, {
-													onEachFeature: popup
-													});	
-												markers.addLayer(puntos);
-												
-											
-																						
-											// especifica el tamaño del popup
-											var customOptions =
-												{
-												'maxWidth': '500',
-												'className' : 'custom'
-												}
-
-											// añade el cluster al mapa
-											map.addLayer(markers);	
-
-											//ajustal a vista a la extensión de la D.O.
-											map.fitBounds(limite.getBounds());
-											
-											//añade control capas
-											
-											var baseMapas = {
-											"Mapa base": base,
-											"Wikimedia": wikimedia,
-											"Foto aérea": ortofoto,
-											};
-
-											var overlayMapas = {
-												"Límite D.O.": limite,
-												"Bodegas": markers
-											};
-											
-											L.control.layers(baseMapas, overlayMapas,{
-											position: 'topright', // 'topleft', 'bottomleft', 'bottomright'
-											collapsed: true // true
-											}).addTo(map);
-											
-										  </script>
-										 </div>
-									
-
-									</div>
-								</div>
-					
-							</div>
-						</div>
-					</div>
-			</div>
-		</div>
-		
 		
 		
 
@@ -828,6 +712,124 @@
 				</div>
 			</div>
 		</div>
+		
+			    <!-- Mapa bodegas -->
+
+		<div class="offers">
+			<div class="">
+				<div class="row">
+					<div class="col text-center">
+						<h2 class="section_title">Localización de las bodegas</h2>
+					</div>
+				</div>
+
+					<!-- Offers Item -->
+					<div class="col-lg-12 offers_col">
+						<div class="offers_item">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="offers_image_container">
+									 <div id='map' class="custom-popup">
+ 
+										  <script>
+										  
+											//crea el mapa, centra la vista y define el zoom
+											var map = L.map('map').setView([41.334693, -1.224871],11);
+											
+											//estilo para los límites de la DO
+											var estilolimite = {
+											"color": "#CC2EFA",
+											"weight": 2, 
+											"opacity": 0.6
+											};
+											
+											//añade los límites de la DO
+											var limite = L.geoJson(limite, { style: estilolimite });
+											limite.addTo(map);
+											
+											//añade Open Street map como mapa base
+											var base = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+											
+											base.addTo(map);
+
+											var wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
+												attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
+											});	
+											
+											//capa ortofoto aérea
+											var ortofoto = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+											attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+											});
+
+											//crea el clúster de puntos
+											var markers = L.markerClusterGroup();
+												
+											//función que muestra el nombre de la bodega en el popup
+											function popup(feature, layer) { 
+
+												var nombre = feature.properties.CEN_DS_NOM;
+												var salto = "<br>";
+												var municipio = feature.properties.MUNICIPIO;
+												var direccion= feature.properties.LOC_DS_DIR;
+												var telefono = feature.properties.LOC_DS_TEL;
+												var paginaweb = feature.properties.LOC_DS_WEB;
+												var htmlString = "<a href="+paginaweb+" target='_blank'>Ver página web</a><br>";
+												layer.bindPopup(nombre.concat(salto,direccion,' - ',municipio,salto,telefono,salto,htmlString)); 	 
+												
+											}
+											
+												// añade puntos al cluster
+												var puntos = L.geoJson(bodegas, {
+													onEachFeature: popup
+													});	
+												markers.addLayer(puntos);
+												
+											
+																						
+											// especifica el tamaño del popup
+											var customOptions =
+												{
+												'maxWidth': '500',
+												'className' : 'custom'
+												}
+
+											// añade el cluster al mapa
+											map.addLayer(markers);	
+
+											//ajustal a vista a la extensión de la D.O.
+											map.fitBounds(limite.getBounds());
+											
+											//añade control capas
+											
+											var baseMapas = {
+											"Mapa base": base,
+											"Wikimedia": wikimedia,
+											"Foto aérea": ortofoto,
+											};
+
+											var overlayMapas = {
+												"Límite D.O.": limite,
+												"Bodegas": markers
+											};
+											
+											L.control.layers(baseMapas, overlayMapas,{
+											position: 'topright', // 'topleft', 'bottomleft', 'bottomright'
+											collapsed: true // true
+											}).addTo(map);
+											
+										  </script>
+										 </div>
+									
+
+									</div>
+								</div>
+					
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+		<!-- Mapa bodegas -->
 
 		<!-- Footer -->
 
