@@ -17,14 +17,16 @@
 	<link rel="stylesheet" href="styles/mapa.css" />	
 	<link rel="stylesheet" href="styles/MarkerCluster.css" />
 	<link rel="stylesheet" href="styles/MarkerCluster.Default.css" />
-	
+	<link rel="stylesheet" href="styles/leaflet.zoomhome.css"/>
+
 		
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"  />
 	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-		<script src="js/leaflet.markercluster-src.js"></script>   
-    <script src="js/bodegas.js"></script>
+	<script src="js/leaflet.markercluster-src.js"></script>
+	<script src="js/leaflet.zoomhome.min.js"></script>
+	<script src="js/bodegas.js"></script>
     <script src="js/limite.js"></script>
 	<style>
         #map {
@@ -735,6 +737,7 @@
 										  
 											//crea el mapa, centra la vista y define el zoom
 											var map = L.map('map').setView([41.334693, -1.224871],11);
+											map.removeControl(map.zoomControl);
 											
 											//estilo para los límites de la DO
 											var estilolimite = {
@@ -799,6 +802,8 @@
 											//ajustal a vista a la extensión de la D.O.
 											map.fitBounds(limite.getBounds());
 											
+											
+											
 											//añade control capas
 											
 											var baseMapas = {
@@ -817,6 +822,12 @@
 											collapsed: true // true
 											}).addTo(map);
 											
+											var zoomHome = L.Control.zoomHome();
+											zoomHome.addTo(map);
+									
+																		
+											
+																						
 										  </script>
 										 </div>
 									
